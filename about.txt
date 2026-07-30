@@ -1,0 +1,38 @@
+
+---
+
+## 📄 **Tarea 2: AboutUs.jsx** (1 punto)
+```jsx
+// src/components/AboutUs.jsx
+import React from 'react';
+
+const AboutUs = () => {
+  return (
+    <div className="about-us">
+      <h2>Sobre Paradise Nursery</h2>
+      <p>
+        🌱 Bienvenidos a <strong>Paradise Nursery</strong>, tu destino número uno 
+        para plantas de interior de alta calidad. Desde 2020, nos dedicamos a 
+        traer la naturaleza a tu hogar con una selección cuidadosamente curada 
+        de plantas que purifican el aire y alegran tu espacio.
+      </p>
+      <p>
+        <strong>Nuestra Misión:</strong> Hacer que el cuidado de plantas sea 
+        accesible y agradable para todos, ofreciendo productos de calidad y 
+        asesoramiento experto.
+      </p>
+      <p>
+        <strong>Nuestra Visión:</strong> Crear comunidades más verdes y saludables, 
+        una planta a la vez.
+      </p>
+      <p>
+        📍 <strong>Ubicación:</strong> Calle de las Flores #123, Ciudad Jardín
+      </p>
+      <p>
+        📞 <strong>Contacto:</strong> hola@paradisenursery.com
+      </p>
+    </div>
+  );
+};
+
+export default AboutUs;
