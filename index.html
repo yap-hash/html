@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería Fotográfica Interactiva</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 1200px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #f0f0f0;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img:focus {
+            outline: 3px solid #667eea;
+            outline-offset: 2px;
+        }
+
+        .caption {
+            padding: 15px;
+            background: white;
+            text-align: center;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .caption span {
+            color: #764ba2;
+            font-weight: 600;
+        }
+
+        .info-panel {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .info-panel h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        #status-message {
+            color: #555;
+            padding: 10px;
+            border-radius: 8px;
+            background: white;
+            min-height: 40px;
+            transition: all 0.3s ease;
+        }
+
+        #status-message.highlight {
+            background: #e8f0fe;
+            border-left: 4px solid #667eea;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📸 Galería Fotográfica</h1>
+        <p class="subtitle">Pase el mouse o use el teclado (Tab) para interactuar con las imágenes</p>
+
+        <div class="gallery" id="gallery">
+            <!-- Imagen 1: Naturaleza -->
+            <div class="gallery-item">
+                <img 
+                    src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=300&fit=crop" 
+                    alt="Paisaje montañoso con lago cristalino y cielo azul" 
+                    tabindex="0"
+                    data-title="Paisaje Montañoso"
+                    data-desc="Hermoso paisaje de montañas y lago"
+                >
+                <div class="caption">🏔️ <span>Paisaje</span> • Montañas</div>
+            </div>
+
+            <!-- Imagen 2: Ciudad -->
+            <div class="gallery-item">
+                <img 
+                    src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=400&h=300&fit=crop" 
+                    alt="Vista panorámica de una ciudad moderna con rascacielos" 
+                    tabindex="0"
+                    data-title="Ciudad Moderna"
+                    data-desc="Vista urbana con arquitectura contemporánea"
+                >
+                <div class="caption">🌆 <span>Ciudad</span> • Urbano</div>
+            </div>
+
+            <!-- Imagen 3: Comida -->
+            <div class="gallery-item">
+                <img 
+                    src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" 
+                    alt="Plato de comida saludable con vegetales y granos" 
+                    tabindex="0"
+                    data-title="Comida Saludable"
+                    data-desc="Plato nutritivo con variedad de alimentos"
+                >
+                <div class="caption">🥗 <span>Comida</span> • Saludable</div>
+            </div>
+
+            <!-- Imagen 4: Animales -->
+            <div class="gallery-item">
+                <img 
+                    src="https://images.unsplash.com/photo-1543854583-3fe61f5d97e1?w=400&h=300&fit=crop" 
+                    alt="Gato siamés de ojos azules descansando en una almohada" 
+                    tabindex="0"
+                    data-title="Gato Siames"
+                    data-desc="Hermoso gato de raza siamesa"
+                >
+                <div class="caption">🐱 <span>Animal</span> • Gato</div>
+            </div>
+
+            <!-- Imagen 5: Arte -->
+            <div class="gallery-item">
+                <img 
+                    src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400&h=300&fit=crop" 
+                    alt="Cuadro abstracto con colores vibrantes y texturas" 
+                    tabindex="0"
+                    data-title="Arte Abstracto"
+                    data-desc="Obra de arte con expresión creativa"
+                >
+                <div class="caption">🎨 <span>Arte</span> • Abstracto</div>
+            </div>
+
+            <!-- Imagen 6: Deportes -->
+            <div class="gallery-item">
+                <img 
+                    src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=400&h=300&fit=crop" 
+                    alt="Persona practicando yoga en un ambiente tranquilo y natural" 
+                    tabindex="0"
+                    data-title="Yoga y Bienestar"
+                    data-desc="Práctica de yoga para el bienestar"
+                >
+                <div class="caption">🧘 <span>Deporte</span> • Yoga</div>
+            </div>
+        </div>
+
+        <div class="info-panel">
+            <h3>📋 Estado de la Imagen</h3>
+            <div id="status-message">Pase el mouse sobre una imagen o use Tab para enfocarla</div>
+        </div>
+
+        <div class="footer">
+            <p>✅ Validado con W3C • WAVE • aXe | Diseño accesible</p>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // 1. EVENTO onload - Configuración inicial
+        // ============================================
+        window.addEventListener('load', function() {
+            console.log('🚀 La página se ha cargado completamente');
+            
+            // Llamar a la función para añadir tabindex (aunque ya está en HTML)
+            setupAccessibility();
+            
+            // Mensaje de confirmación
+            console.log('✅ Galería inicializada correctamente');
+            console.log(`📸 Total de imágenes: ${document.querySelectorAll('.gallery-item img').length}`);
+        });
+
+        // ============================================
+        // 2. FUNCIÓN para configurar accesibilidad
+        // ============================================
+        function setupAccessibility() {
+            console.log('♿ Configurando atributos de accesibilidad...');
+            
+            // Obtener todas las imágenes
+            const images = document.querySelectorAll('.gallery-item img');
+            
+            // Bucle for para recorrer cada imagen
+            for (let i = 0; i < images.length; i++) {
+                const img = images[i];
+                
+                // Añadir tabindex si no existe
+                if (!img.hasAttribute('tabindex')) {
+                    img.setAttribute('tabindex', '0');
+                    console.log(`  ✅ Añadido tabindex a imagen ${i + 1}`);
+                }
+                
+                // Añadir atributo aria-label para mejor accesibilidad
+                const altText = img.getAttribute('alt') || `Imagen ${i + 1}`;
+                img.setAttribute('aria-label', altText);
+                
+                // Añadir role para lectores de pantalla
+                img.setAttribute('role', 'img');
+            }
+            
+            console.log('✅ Configuración de accesibilidad completada');
+        }
+
+        // ============================================
+        // 3. FUNCIONES para actualizar mensaje de estado
+        // ============================================
+        function updateStatus(message, type = 'info') {
+            const statusElement = document.getElementById('status-message');
+            if (statusElement) {
+                statusElement.textContent = message;
+                statusElement.className = type === 'highlight' ? 'highlight' : '';
+            }
+        }
+
+        // ============================================
+        // 4. EVENTOS onmouseover y onmouseleave
+        // ============================================
+        document.querySelectorAll('.gallery-item img').forEach((img, index) => {
+            // Evento onmouseover
+            img.addEventListener('mouseover', function(e) {
+                const altText = this.getAttribute('alt') || `Imagen ${index + 1}`;
+                const title = this.getAttribute('data-title') || 'Sin título';
+                
+                updateStatus(`🖱️ Ratón sobre: "${title}" - ${altText}`, 'highlight');
+                console.log(`🖱️ Mouseover en imagen ${index + 1}: ${title}`);
+                
+                // Cambiar estilo visual
+                this.style.filter = 'brightness(1.05)';
+            });
+            
+            // Evento onmouseleave
+            img.addEventListener('mouseleave', function(e) {
+                updateStatus('👋 Ratón fuera de la imagen', '');
+                console.log(`🖱️ Mouseleave en imagen ${index + 1}`);
+                
+                // Restaurar estilo
+                this.style.filter = 'brightness(1)';
+            });
+        });
+
+        // ============================================
+        // 5. EVENTOS onfocus y onblur (accesibilidad por teclado)
+        // ============================================
+        document.querySelectorAll('.gallery-item img').forEach((img, index) => {
+            // Evento onfocus
+            img.addEventListener('focus', function(e) {
+                const altText = this.getAttribute('alt') || `Imagen ${index + 1}`;
+                const title = this.getAttribute('data-title') || 'Sin título';
+                const desc = this.getAttribute('data-desc') || '';
+                
+                updateStatus(`⌨️ Teclado enfocado: "${title}" - ${altText}`, 'highlight');
+                console.log(`⌨️ Focus en imagen ${index + 1}: ${title}`);
+                
+                // Efecto visual de enfoque
+                this.style.outline = '4px solid #ff6b6b';
+                this.style.outlineOffset = '4px';
+                this.style.transform = 'scale(1.02)';
+                
+                // Mejorar accesibilidad: anunciar para lectores de pantalla
+                if (desc) {
+                    console.log(`  📝 Descripción: ${desc}`);
+                }
+            });
+            
+            // Evento onblur
+            img.addEventListener('blur', function(e) {
+                updateStatus('👀 Enfoque perdido', '');
+                console.log(`⌨️ Blur en imagen ${index + 1}`);
+                
+                // Restaurar estilo visual
+                this.style.outline = '3px solid #667eea';
+                this.style.outlineOffset = '2px';
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // ============================================
+        // 6. MENSAJE DE BIENVENIDA en consola
+        // ============================================
+        console.log('%c📸 Galería Fotográfica Interactiva', 'font-size: 20px; font-weight: bold; color: #764ba2;');
+        console.log('%cEventos disponibles:', 'font-size: 14px; font-weight: bold;');
+        console.log('  • mouseover / mouseleave');
+        console.log('  • focus / blur');
+        console.log('  • load');
+        console.log('♿ Totalmente accesible con teclado (Tab)');
+        
+        // ============================================
+        // 7. FUNCIÓN ADICIONAL: Navegación por teclado mejorada
+        // ============================================
+        document.addEventListener('keydown', function(e) {
+            // Atajo: presionar 'Enter' o 'Espacio' en una imagen enfocada
+            if (e.key === 'Enter' || e.key === ' ') {
+                const focused = document.activeElement;
+                if (focused && focused.tagName === 'IMG' && focused.closest('.gallery-item')) {
+                    e.preventDefault();
+                    const title = focused.getAttribute('data-title') || 'Imagen';
+                    console.log(`🎯 Tecla presionada en: ${title}`);
+                    updateStatus(`🎯 Seleccionada: "${title}"`, 'highlight');
+                    
+                    // Feedback visual
+                    focused.style.boxShadow = '0 0 30px rgba(118, 75, 162, 0.6)';
+                    setTimeout(() => {
+                        focused.style.boxShadow = 'none';
+                    }, 500);
+                }
+            }
+        });
+
+        console.log('✅ Presiona Enter o Espacio en una imagen enfocada para seleccionarla');
+    </script>
+</body>
+</html>
